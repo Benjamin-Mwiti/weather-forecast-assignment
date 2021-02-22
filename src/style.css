@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  .app__bar {
+    position: relative;
+    display: grid;
+    width: 100%;
+    min-height: 40vh;
+    margin-bottom: 8vh;
+  }
+  
+  .app__bar > .app__title {
+    position: relative;
+    display: flex;
+    margin-left: 2vw;
+    margin-bottom: 3vh;
+    width: 98vw;
+    min-height: 17%;
+    border-bottom: 1px solid #999;
+  }
+  
+  .app__title > h1 {
+    position: relative;
+    font-size: 3em;
+    font-weight: 500;
+    color: #e67850;
+  }
+  
+  .search__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    min-height: 83%;
+    background: linear-gradient(#e67850, #e48050, #e67850);
+  }
+  
+  .search__container > form {
+    position: relative;
+    display: flex;
+    margin-left: 70%;
+  }
+  
+  .search__container > form > input {
+    width: 20vw;
+    height: 8vh;
+    border-radius: 20vw 0 0 20vw;
+    border-color: transparent;
+    outline: none;
+    font-size: 1em;
+  }
+  
+  .search__container > form > button {
+    width: 8vw;
+    height: 8vh;
+    border-radius: 0 20vw 20vw 0;
+    border: 2px solid #db5828;
+    outline: none;
+    background-color: #e96e50;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .city__forecast {
+    position: relative;
+    display: flex;
+    margin: auto;
+    width: 80%;
+    height: 25vh;
+    border-top: 1px solid #999;
+  }
+  
+  .city__forecast > span {
+    margin: .35rem auto;
+    flex: .15;
+  }
+  
+  .city__forecast > * {
+    margin: .35rem 2rem;
+  }
+  
+  .city__stats {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: .85;
+    justify-content: space-evenly;
+  }
+  
+  .city__stats p > strong > span,
+  .city__stats p:last-child > span {
+    color: #e67850;
+  }
+  
+  .city__stats p:nth-child(2) > span {
+    padding: 1.5px 3.5px;
+    border-radius: 10px;
+    font-size: .75rem;
+    color: #fff;
+    background-color: #000;
+  }
+  
+  /* Design Responsiveness */
+  
+  @media only screen and (max-width: 1100px) {
+    .search__container > form {
+      margin-left: 65%;
+    }
+    .search__container > form > input {
+      height: 6vh;
+    }
+    .search__container > form > button {
+      width: 8vh;
+      height: 6vh;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .app__title > h1 {
+      font-size: 2.3rem;
+    }
+    .search__container > form > input {
+      height: 4vh;
+      font-size: .55em;
+    }
+    .search__container > form > button {
+      width: 6vh;
+      height: 4vh;
+      font-size: .55em;
+    }
+  }
+  
+  
