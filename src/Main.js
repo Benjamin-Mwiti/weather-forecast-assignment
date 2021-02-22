@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import './style.css';
 import $ from 'jquery';
 
@@ -10,11 +10,6 @@ $(function() {
 function Main() {
 
   const [userInput, setUserInput] = useState("");
-  const [cityName, setCityName] = useState();
-  const [countryFlag, setcountryFlag] = useState();
-  // const [baseURL, setBaseURL] = useState('api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}');
-  
-  const baseURL = 'api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}';
 
   useEffect(() => {
     // effect
