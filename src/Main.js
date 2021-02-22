@@ -6,10 +6,11 @@ $(function() {
   $();
 });
 
-
 function Main() {
-
+  
   const [userInput, setUserInput] = useState("");
+
+  const baseURL = `http://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
 
   useEffect(() => {
     // effect
