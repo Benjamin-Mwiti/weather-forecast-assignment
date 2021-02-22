@@ -2,22 +2,14 @@ import React, { useState, useEffect } from "react";
 import './style.css';
 import $ from 'jquery';
 
-$(function() {
-  $();
-});
-
 function Main() {
   
   const [userInput, setUserInput] = useState("");
+  const [cityName, setCityName] = useState("");
+  
+  const baseURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
 
-  const baseURL = `http://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
-
-  useEffect(() => {
-    // effect
-    return () => {
-      setUserInput("");
-    }
-  }, [userInput])
+  $(function() {});
 
   return (
     <div className="app">
@@ -27,8 +19,14 @@ function Main() {
         </div>
         <div className="search__container">
           <form>
-            <input type="search" name="City name" placeholder="Name of your city" />
-            <button type="submit">Search</button>
+            <input type="search" name="City name" value={userInput} placeholder="Name of your city" 
+              onChange = {e => {
+                setUserInput(e.target.value);
+              }} />
+            <button type="submit" onClick={(e) => { 
+              console.log(userInput);
+              e.preventDefault();
+            }} >Search</button>
           </form>
         </div>
       </div>

@@ -17,7 +17,7 @@
   .app__bar > .app__title {
     position: relative;
     display: flex;
-    flex: .2;
+    flex: .1;
     margin-left: 2vw;
     margin-bottom: 3vh;
     width: 98vw;
@@ -34,7 +34,7 @@
   .search__container {
     position: relative;
     display: flex;
-    flex: .8;
+    flex: .9;
     align-items: center;
     width: 100vw;
     background: linear-gradient(#e67850, #e48050, #e67850);
