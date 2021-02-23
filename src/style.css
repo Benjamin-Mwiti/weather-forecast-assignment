@@ -100,6 +100,11 @@
   .city__stats p:last-child > span {
     color: #e67850;
   }
+
+  .city__stats > p > strong > span > img {
+    width: 20px;
+    height: 10px;
+  }
   
   .city__stats p:nth-child(2) > span > .average__temp {
     padding: 1.5px 3.5px;

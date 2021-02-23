@@ -37,10 +37,9 @@ function Main() {
       dataType: "jsonp",
       success: function(data) {
         if(window.navigator.onLine) {
-          // countryName = data.sys.country;
-          let latLon = [data.coord.lat, data.coord.lon];
           // setLat_Lon(latLon);
           setCountry_Code(data.sys.country);
+          
           let cityForecast_2 = $('.city__forecast > .city__stats > p');
           // Weather icon
           $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
@@ -87,7 +86,7 @@ function Main() {
         console.log(data);
         console.log(data.flag);
         let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        $(cityForecast_2.find('strong > span').eq(1)).append('<img src="https://restcountries.eu/data/" + data.flag + ".svg" />');
+        $(cityForecast_2.find('strong > span')).append("<img src=" + data.flag + " />");
       }
     });
   });
