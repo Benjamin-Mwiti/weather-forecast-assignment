@@ -21,8 +21,6 @@ function Main() {
   const [city_name, setCity_Name] = useState("");
   const [country_Name, setCountry_Name] = useState("");
   const [lat_Lon, setLat_Lon] = useState([]);
-/*   let countryName = "";
-  console.log(countryName); */
   
 
   $(function() {
@@ -88,7 +86,7 @@ function Main() {
       success: function (data) {
         console.log(data);
         let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        $(cityForecast_2.find('strong > span').eq(1)).append(data.flag);
+        $(cityForecast_2.find('strong > span').eq(1)).after('<img src="https://restcountries.eu/data/" + data.flag + ".svg" />');
       }
     });
   });
