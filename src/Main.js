@@ -24,104 +24,74 @@ function Main() {
 /*   let countryName = "";
   console.log(countryName); */
   
-  useEffect(() => {
-    $(function() {
-      const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
-      /* let countryName;
-      function country(countryName) {
-        console.log(countryName)
-      } */
-      $.ajax({
-        url: openWeatherMapURL,
-        type: "GET",
-        /* 
-        * JavaScript Object Nottion Pattern
-        * Some APIs only accept jsonp dataType and they may throw an error if its just json
-        */
-        dataType: "jsonp",
-        success: function(data) {
-          if(window.navigator.onLine) {
-            // countryName = data.sys.country;
-            let latLon = [data.coord.lat, data.coord.lon];
-            /* function change() {
-              useEffect(() => {
-              }, [])
-            } */
-            setLat_Lon(latLon).preventDefault();
-            setCountry_Name(data.sys.country);
-            let cityForecast_2 = $('.city__forecast > .city__stats > p');
-            // Weather icon
-            $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
-  
-            // First child of city__stats class
-            $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
-            $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
-  
-            // Second child of city__stats class
-            $(cityForecast_2.find('.temp').eq(0)).text(data.main.temp);
-            // $(cityForecast_2.find('.temp').eq(0)).append("<div><sup>o</sup>C</div>");
-            $(cityForecast_2.find('.temp').eq(1)).text(data.main.temp_min);
-            $(cityForecast_2.find('.temp').eq(2)).text(data.main.temp_max);
-            $(cityForecast_2.find('.wind__speed')).text(data.wind.speed);
-            $(cityForecast_2.find('.clouds')).text(data.clouds.all);
-  
-            // Third child of city__stats class
-            $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lat + ", " + data.coord.lon + "]");
-            $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure);
-          } else {
-            console.log("Offline");
-            /* const isOnline = () => {
-              $(function() {
-                $('.city__forecast').html(
-                  <Alert show="true" variant="success" color="primary">Make sure your browser has internet connection for website to work properly
-                  alertService.warn("Warning!");
-                  </Alert>
-                  // <div class="alert alert-warning alert-dismissible fade show">
-                  //   Make sure your browser has internet connection for website to work properly
-                  // </div>
-                );
-              });
-            }; */
-          }
-        }
-      });
-      // country()
-      // return countryName;
-      console.log(country_Name);
-      console.log(lat_Lon);
-      const restCountriesURL = `https://restcountries.eu/rest/v2/name/${country_Name}`;
-      /* fetch(restCountriesURL)
-              .then(response => response.json())
-              .then(data => console.log(data))
-              .catch(err => alert("Wrong input")) */
-      $.ajax({
-        url: restCountriesURL,
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-          console.log(data);
-          let cityForecast_2 = $('.city__forecast > .city__stats > p');
-          $(cityForecast_2.find('strong > span').eq(1)).append(data.flag);
-        }
-      });
-    });
-  }, [])
-  
 
-  /* $(function() {
-    console.log(countryName);
-    const restCountriesURL = `https://restcountries.eu/rest/v2/name/${countryName}`;
+  $(function() {
+    const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
+    
+    $.ajax({
+      url: openWeatherMapURL,
+      type: "GET",
+      /* 
+      * JavaScript Object Nottion Pattern
+      * Some APIs only accept jsonp dataType and they may throw an error if its just json
+      */
+      dataType: "jsonp",
+      success: function(data) {
+        if(window.navigator.onLine) {
+          // countryName = data.sys.country;
+          let latLon = [data.coord.lat, data.coord.lon];
+          // setLat_Lon(latLon);
+          setCountry_Name(data.sys.country);
+          let cityForecast_2 = $('.city__forecast > .city__stats > p');
+          // Weather icon
+          $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
+
+          // First child of city__stats class
+          $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
+          $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
+
+          // Second child of city__stats class
+          $(cityForecast_2.find('.temp').eq(0)).text(data.main.temp);
+          // $(cityForecast_2.find('.temp').eq(0)).append("<div><sup>o</sup>C</div>");
+          $(cityForecast_2.find('.temp').eq(1)).text(data.main.temp_min);
+          $(cityForecast_2.find('.temp').eq(2)).text(data.main.temp_max);
+          $(cityForecast_2.find('.wind__speed')).text(data.wind.speed);
+          $(cityForecast_2.find('.clouds')).text(data.clouds.all);
+
+          // Third child of city__stats class
+          $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lat + ", " + data.coord.lon + "]");
+          $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure);
+        } else {
+          console.log("Offline");
+          /* const isOnline = () => {
+            $(function() {
+              $('.city__forecast').html(
+                <Alert show="true" variant="success" color="primary">Make sure your browser has internet connection for website to work properly
+                alertService.warn("Warning!");
+                </Alert>
+                // <div class="alert alert-warning alert-dismissible fade show">
+                //   Make sure your browser has internet connection for website to work properly
+                // </div>
+              );
+            });
+          }; */
+        }
+      }
+    });
+    // return countryName;
+    console.log(country_Name);
+    const restCountriesURL = `https://restcountries.eu/rest/v2/name/${country_Name}`;
     $.ajax({
       url: restCountriesURL,
       type: "GET",
       dataType: "json",
       success: function (data) {
         console.log(data);
-        // let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        // $(cityForecast_2.find('strong > span').eq(1)).append(data.flag);
+        let cityForecast_2 = $('.city__forecast > .city__stats > p');
+        $(cityForecast_2.find('strong > span').eq(1)).append(data.flag);
       }
     });
-  }); */
+  });
 
   return (
     <div className="app">
