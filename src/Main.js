@@ -14,6 +14,7 @@
 import React, { useState } from "react";
 import './style.css';
 import $ from 'jquery';
+import { Alert } from 'react-bootstrap';
 
 function Main() {
   
@@ -31,24 +32,35 @@ function Main() {
       */
       dataType: "jsonp",
       success: function(data) {
-        let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        // Weather icon
-        $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
+        if(window.navigator.onLine) {
+          let cityForecast_2 = $('.city__forecast > .city__stats > p');
+          // Weather icon
+          $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
 
-        // First child of city__stats class
-        $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
-        $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
+          // First child of city__stats class
+          $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
+          $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
 
-        // Second child of city__stats class
-        $(cityForecast_2.find('.temp').eq(0)).text(data.main.temp/*  + <span><sup>o</sup>C</span> */);
-        $(cityForecast_2.find('.temp').eq(1)).text(data.main.temp_min);
-        $(cityForecast_2.find('.temp').eq(2)).text(data.main.temp_max);
-        $(cityForecast_2.find('.wind__speed')).text(data.wind.speed);
-        $(cityForecast_2.find('.clouds')).text(data.clouds.all);
+          // Second child of city__stats class
+          $(cityForecast_2.find('.temp').eq(0)).text(data.main.temp/*  + <span><sup>o</sup>C</span> */);
+          $(cityForecast_2.find('.temp').eq(1)).text(data.main.temp_min);
+          $(cityForecast_2.find('.temp').eq(2)).text(data.main.temp_max);
+          $(cityForecast_2.find('.wind__speed')).text(data.wind.speed);
+          $(cityForecast_2.find('.clouds')).text(data.clouds.all);
 
-        // Third child of city__stats class
-        $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lon + ", " + data.coord.lat + "]");
-        $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure);
+          // Third child of city__stats class
+          $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lon + ", " + data.coord.lat + "]");
+          $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure);
+        } else {
+          $(function() {
+            $('.city__forecast').text(
+              <Alert show="true" variant="warning">Make sure your browser has internet connection for website to work properly</Alert>
+              // <div class="alert alert-warning alert-dismissible fade show">
+              //   Make sure your browser has internet connection for website to work properly
+              // </div>
+            );
+          });
+        }
       }
     });
   });
