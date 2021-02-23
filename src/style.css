@@ -37,7 +37,7 @@
     flex: .9;
     align-items: center;
     width: 100vw;
-    background: linear-gradient(#e67850, #e48050, #e67850);
+    background: linear-gradient(#e67850, #f37c46, #e67850);
   }
   
   .search__container > form {

@@ -1,15 +1,41 @@
+/******************************************************************************
+***
+* BTI425 – Assignment 1
+* I declare that this assignment is my own work in accordance with Seneca Academic Policy.
+* No part of this assignment has been copied manually or electronically from any other source
+* (including web sites) or distributed to other students.
+*
+* Name: ___________________ Student ID: _______________ Date: ____________________
+*
+*
+******************************************************************************
+**/
+
 import React, { useState, useEffect } from "react";
 import './style.css';
 import $ from 'jquery';
 
 function Main() {
   
-  const [userInput, setUserInput] = useState("");
-  const [cityName, setCityName] = useState("");
+  const [city_name, setCity_Name] = useState("");
   
-  const baseURL = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
+  const baseURL = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
 
-  $(function() {});
+  $(function() {
+    $.ajax({
+      url: baseURL,
+      type: "GET",
+      /* 
+      * JavaScript Object Nottion Pattern
+      * Some APIs only accept jsonp dataType and they may throw an error if its just json
+      */
+      dataType: "jsonp",
+      success: function(data) {
+        let cityForecast_2 = $('.city__forecast > .city__stats').eq(1);
+        $(cityForecast_2).text(data.name + ", " + data.sys.country);
+      }
+    });
+  });
 
   return (
     <div className="app">
@@ -19,12 +45,13 @@ function Main() {
         </div>
         <div className="search__container">
           <form>
-            <input type="search" name="City name" value={userInput} placeholder="Name of your city" 
+            <input type="search" name="City name" value={city_name} placeholder="Name of your city" 
               onChange = {e => {
-                setUserInput(e.target.value);
+                setCity_Name(e.target.value);
               }} />
             <button type="submit" onClick={(e) => { 
-              console.log(userInput);
+              console.log(city_name);
+              setCity_Name("");
               e.preventDefault();
             }} >Search</button>
           </form>
