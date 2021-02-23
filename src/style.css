@@ -77,7 +77,10 @@
   }
   
   .city__forecast > span {
-    margin: .35rem auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: .5rem auto;
     flex: .15;
   }
   
@@ -98,7 +101,7 @@
     color: #e67850;
   }
   
-  .city__stats p:nth-child(2) > span {
+  .city__stats p:nth-child(2) > span > .average__temp {
     padding: 1.5px 3.5px;
     border-radius: 10px;
     font-size: .75rem;
