@@ -20,6 +20,7 @@ function Main() {
   
   const [city_name, setCity_Name] = useState("");
   const [country_Name, setCountry_Name] = useState("");
+  const [country_Code, setCountry_Code] = useState("");
   const [lat_Lon, setLat_Lon] = useState([]);
   
 
@@ -39,7 +40,7 @@ function Main() {
           // countryName = data.sys.country;
           let latLon = [data.coord.lat, data.coord.lon];
           // setLat_Lon(latLon);
-          setCountry_Name(data.sys.country);
+          setCountry_Code(data.sys.country);
           let cityForecast_2 = $('.city__forecast > .city__stats > p');
           // Weather icon
           $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
@@ -76,17 +77,17 @@ function Main() {
         }
       }
     });
-    // return countryName;
-    console.log(country_Name);
-    const restCountriesURL = `https://restcountries.eu/rest/v2/name/${country_Name}`;
+
+    const restCountriesURL = `https://restcountries.eu/rest/v2/alpha/${country_Code}`;
     $.ajax({
       url: restCountriesURL,
       type: "GET",
       dataType: "json",
       success: function (data) {
         console.log(data);
+        console.log(data.flag);
         let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        $(cityForecast_2.find('strong > span').eq(1)).after('<img src="https://restcountries.eu/data/" + data.flag + ".svg" />');
+        $(cityForecast_2.find('strong > span').eq(1)).append('<img src="https://restcountries.eu/data/" + data.flag + ".svg" />');
       }
     });
   });
