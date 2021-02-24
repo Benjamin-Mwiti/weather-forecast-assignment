@@ -47,7 +47,7 @@ function Main() {
           // Weather icon
           $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
 
-          $('.city__stats').html("<p><strong><span>" + data.name + ", " + data.sys.country + "</span> <i>" + data.weather[0].description + "</i></strong></p>" + "<p><span><span className='temp average__temp'>" + data.main.temp + "</span><sup>o</sup>C</span> temperature from <span className='temp'>" + data.main.temp_min + "</span> to <span className='temp'>" + data.main.temp_max + "</span><sup>o</sup>C, wind <span className='wind__speed'>" + data.wind.speed + "</span>m/s. clouds <span className='clouds'>" + data.clouds.all + "</span> %, <span className='pressure'>" + data.main.pressure + "</span> hpa</p><p>Geo coords <span>[" + data.coord.lat + ", " + data.coord.lon + "]</span></p>");
+          $('.city__stats').html("<p><strong><span>" + data.name + ", " + data.sys.country + " </span> <i>" + data.weather[0].description + "</i></strong></p>" + "<p><span><span className='temp average__temp'>" + data.main.temp + "</span><sup>o</sup>C</span> temperature from <span className='temp'>" + data.main.temp_min + "</span> to <span className='temp'>" + data.main.temp_max + "</span><sup>o</sup>C, wind <span className='wind__speed'>" + data.wind.speed + "</span>m/s. clouds <span className='clouds'>" + data.clouds.all + "</span> %, <span className='pressure'>" + data.main.pressure + "</span> hpa</p><p>Geo coords <span>[" + data.coord.lat + ", " + data.coord.lon + "]</span></p>");
 
           $.ajax({
             url: restCountriesURL,
