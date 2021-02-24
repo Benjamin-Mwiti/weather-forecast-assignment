@@ -40,10 +40,8 @@ function Main() {
       dataType: "jsonp",
       success: function(data) {
         if(isOnline) {
-          // setLat_Lon(latLon);
           setCountry_Code(data.sys.country);
           
-          let cityForecast_2 = $('.city__forecast > .city__stats > p');
           // Weather icon
           $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
 
@@ -54,10 +52,11 @@ function Main() {
             type: "GET",
             dataType: "json",
             success: function (data) {
-              console.log(data);
-              console.log(data.flag);
               let cityForecast_2 = $('.city__forecast > .city__stats > p');
               $(cityForecast_2.find('strong > span')).append("<img src=" + data.flag + " />");
+            },
+            error: (err) => {
+              console.log(err);
             }
           });
 
@@ -78,9 +77,12 @@ function Main() {
           $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure); */
         } else {
           $(function() {
-            $('.city__forecast').html('<Alert variant="warning" toggle={() => setShow(true)} dismissible>Ensure the internet connection is on</Alert>');
+            alert("Ensure the internet connection is on");
           });
         }
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
   });
@@ -93,12 +95,14 @@ function Main() {
         </div>
         <div className="search__container">
           <form>
-            <input type="search" name="City name" value={city_name} placeholder="Name of your city" 
+            <input type="search" name="city name" value={city_name} placeholder="Name of your city" 
               onChange = {e => {
                 setCity_Name(e.target.value);
               }} />
             <button type="submit" onClick={(e) => {
-              // isOnline
+              if(city_name == "") {
+                alert("The field should not be empty");
+              }
               e.preventDefault();
             }} >Search</button>
           </form>
