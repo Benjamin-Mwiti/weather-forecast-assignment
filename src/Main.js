@@ -11,17 +11,15 @@
 ******************************************************************************
 **/
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './style.css';
 import $ from 'jquery';
-import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Main() {
   
   const [city_name, setCity_Name] = useState("");
   const [country_Code, setCountry_Code] = useState("");
-  const [show, setShow] = useState(true);
   
   let isOnline = window.navigator.onLine;
   
@@ -59,22 +57,6 @@ function Main() {
               console.log(err);
             }
           });
-
-          /* // First child of city__stats class
-          $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
-          $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
-
-          // Second child of city__stats class
-          $(cityForecast_2.find('.temp').eq(0)).text(data.main.temp);
-          // $(cityForecast_2.find('.temp').eq(0)).append("<div><sup>o</sup>C</div>");
-          $(cityForecast_2.find('.temp').eq(1)).text(data.main.temp_min);
-          $(cityForecast_2.find('.temp').eq(2)).text(data.main.temp_max);
-          $(cityForecast_2.find('.wind__speed')).text(data.wind.speed);
-          $(cityForecast_2.find('.clouds')).text(data.clouds.all);
-
-          // Third child of city__stats class
-          $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lat + ", " + data.coord.lon + "]");
-          $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure); */
         } else {
           $(function() {
             alert("Ensure the internet connection is on");
@@ -112,9 +94,6 @@ function Main() {
         <div className="city__forecast">
           <span></span>
           <div className="city__stats">
-            {/* <p><strong><span>Toronto, US</span> <i>overcast clouds</i></strong></p>
-            <p><span><span className="temp average__temp">0.9</span><sup>o</sup>C</span> temperature from <span className="temp">0.6</span> to <span className="temp">1.1</span><sup>o</sup>C, wind <span className="wind__speed">3.13</span>m/s. clouds <span className="clouds">100</span> %, <span className="pressure">1013</span> hpa</p>
-            <p>Geo coords <span>[40.4642, -80.6009]</span></p> */}
           </div>
         </div>
       </div>
