@@ -28,6 +28,7 @@ function Main() {
 
   $(function() {
     const openWeatherMapURL = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&units=metric&appid=1cc7ad57a30f3ba7be0d6a9766a69562`;
+    const restCountriesURL = `https://restcountries.eu/rest/v2/alpha/${country_Code}`;
     
     $.ajax({
       url: openWeatherMapURL,
@@ -48,7 +49,6 @@ function Main() {
 
           $('.city__stats').html("<p><strong><span>" + data.name + ", " + data.sys.country + "</span> <i>" + data.weather[0].description + "</i></strong></p>" + "<p><span><span className='temp average__temp'>" + data.main.temp + "</span><sup>o</sup>C</span> temperature from <span className='temp'>" + data.main.temp_min + "</span> to <span className='temp'>" + data.main.temp_max + "</span><sup>o</sup>C, wind <span className='wind__speed'>" + data.wind.speed + "</span>m/s. clouds <span className='clouds'>" + data.clouds.all + "</span> %, <span className='pressure'>" + data.main.pressure + "</span> hpa</p><p>Geo coords <span>[" + data.coord.lat + ", " + data.coord.lon + "]</span></p>");
 
-          const restCountriesURL = `https://restcountries.eu/rest/v2/alpha/${country_Code}`;
           $.ajax({
             url: restCountriesURL,
             type: "GET",
