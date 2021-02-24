@@ -14,14 +14,16 @@
 import React, { useState, useEffect } from "react";
 import './style.css';
 import $ from 'jquery';
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Main() {
   
   const [city_name, setCity_Name] = useState("");
-  const [country_Name, setCountry_Name] = useState("");
   const [country_Code, setCountry_Code] = useState("");
-  const [lat_Lon, setLat_Lon] = useState([]);
+  const [show, setShow] = useState(true);
+  
+  let isOnline = window.navigator.onLine;
   
 
   $(function() {
@@ -36,7 +38,7 @@ function Main() {
       */
       dataType: "jsonp",
       success: function(data) {
-        if(window.navigator.onLine) {
+        if(isOnline) {
           // setLat_Lon(latLon);
           setCountry_Code(data.sys.country);
           
@@ -44,7 +46,22 @@ function Main() {
           // Weather icon
           $('.city__forecast > span').html("<img src=http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png />");
 
-          // First child of city__stats class
+          $('.city__stats').html("<p><strong><span>" + data.name + ", " + data.sys.country + "</span> <i>" + data.weather[0].description + "</i></strong></p>" + "<p><span><span className='temp average__temp'>" + data.main.temp + "</span><sup>o</sup>C</span> temperature from <span className='temp'>" + data.main.temp_min + "</span> to <span className='temp'>" + data.main.temp_max + "</span><sup>o</sup>C, wind <span className='wind__speed'>" + data.wind.speed + "</span>m/s. clouds <span className='clouds'>" + data.clouds.all + "</span> %, <span className='pressure'>" + data.main.pressure + "</span> hpa</p><p>Geo coords <span>[" + data.coord.lat + ", " + data.coord.lon + "]</span></p>");
+
+          const restCountriesURL = `https://restcountries.eu/rest/v2/alpha/${country_Code}`;
+          $.ajax({
+            url: restCountriesURL,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+              console.log(data);
+              console.log(data.flag);
+              let cityForecast_2 = $('.city__forecast > .city__stats > p');
+              $(cityForecast_2.find('strong > span')).append("<img src=" + data.flag + " />");
+            }
+          });
+
+          /* // First child of city__stats class
           $(cityForecast_2.find('strong > span')).text(data.name + ", " + data.sys.country);
           $(cityForecast_2.find('strong > i')).text(data.weather[0].description);
 
@@ -58,35 +75,12 @@ function Main() {
 
           // Third child of city__stats class
           $(cityForecast_2.eq(2).find('span')).text("[" + data.coord.lat + ", " + data.coord.lon + "]");
-          $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure);
+          $(cityForecast_2.eq(1).find('.pressure')).text(data.main.pressure); */
         } else {
-          console.log("Offline");
-          /* const isOnline = () => {
-            $(function() {
-              $('.city__forecast').html(
-                <Alert show="true" variant="success" color="primary">Make sure your browser has internet connection for website to work properly
-                alertService.warn("Warning!");
-                </Alert>
-                // <div class="alert alert-warning alert-dismissible fade show">
-                //   Make sure your browser has internet connection for website to work properly
-                // </div>
-              );
-            });
-          }; */
+          $(function() {
+            $('.city__forecast').html('<Alert variant="warning" toggle={() => setShow(true)} dismissible>Ensure the internet connection is on</Alert>');
+          });
         }
-      }
-    });
-
-    const restCountriesURL = `https://restcountries.eu/rest/v2/alpha/${country_Code}`;
-    $.ajax({
-      url: restCountriesURL,
-      type: "GET",
-      dataType: "json",
-      success: function (data) {
-        console.log(data);
-        console.log(data.flag);
-        let cityForecast_2 = $('.city__forecast > .city__stats > p');
-        $(cityForecast_2.find('strong > span')).append("<img src=" + data.flag + " />");
       }
     });
   });
@@ -111,20 +105,12 @@ function Main() {
         </div>
       </div>
       <div className="app__body">
-        {/* <div className="city__forecast">
-          <span>Icon</span>
-          <div className="city__stats">
-            <p><strong><span>Toronto, CA</span> <i>broken clouds</i></strong></p>
-            <p><span>-0.7<sup>o</sup>C</span> temperature from -1.1 to 0<sup>o</sup>C, wind 4.52m/s. clouds 77 %, 1008 hpa</p>
-            <p>Geo coords <span>[43.7001, -79.4163]</span></p>
-          </div>
-        </div> */}
         <div className="city__forecast">
           <span></span>
           <div className="city__stats">
-            <p><strong><span>Toronto, US</span> <i>overcast clouds</i></strong></p>
+            {/* <p><strong><span>Toronto, US</span> <i>overcast clouds</i></strong></p>
             <p><span><span className="temp average__temp">0.9</span><sup>o</sup>C</span> temperature from <span className="temp">0.6</span> to <span className="temp">1.1</span><sup>o</sup>C, wind <span className="wind__speed">3.13</span>m/s. clouds <span className="clouds">100</span> %, <span className="pressure">1013</span> hpa</p>
-            <p>Geo coords <span>[40.4642, -80.6009]</span></p>
+            <p>Geo coords <span>[40.4642, -80.6009]</span></p> */}
           </div>
         </div>
       </div>
